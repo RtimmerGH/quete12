@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NasaService } from './nasa.service';
+import Apod from './models/apod.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'quete12';
+  public imgOfTheDay?:Apod;
+
+  constructor(public nasa: NasaService){}
+
+  ngOnInit(){
+    this.nasa.getImageOfTheDay().subscribe(img => {
+      this.imgOfTheDay = img;
+    })
+  }
+
 }
